@@ -1,12 +1,21 @@
 import React from "react";
+import TextField from 'material-ui/TextField';
+import RaisedButton from "material-ui/RaisedButton";
+import DatePicker from 'material-ui/DatePicker';
 
+const newStyle = {
+  paddingLeft: '40px',
+  paddingRight: '40px',
+  background: 'grey',
+  // height: 'calc(100vh - 64px)'
+}
 export default class Form extends React.Component {
   state = {
     firstName: "",
     lastName: "",
-    username: "",
-    email: "",
-    password: ""
+    birthDate: "",
+    gender: "",
+    color: ""
   };
 
   change = e => {
@@ -22,59 +31,52 @@ export default class Form extends React.Component {
     this.setState({
       firstName: "",
       lastName: "",
-      username: "",
-      email: "",
-      password: ""
+      birthDate: "",
+      gender: "",
+      color: ""
     });
     this.props.onChange({
       firstName: "",
       lastName: "",
-      username: "",
-      email: "",
-      password: ""
+      birthDate: "",
+      gender: "",
+      color: ""
     });
   };
 
   render() {
     return (
-      <form>
-        <input
+      <form style={newStyle}>
+
+        <TextField
           name="firstName"
-          placeholder="First name"
+          floatingLabelText="First Name"
+          floatingLabelFixed={false} 
           value={this.state.firstName}
           onChange={e => this.change(e)}
         />
+
         <br />
-        <input
+
+        <TextField
           name="lastName"
-          placeholder="Last name"
+          floatingLabelText="Last Name"
+          floatingLabelFixed={false} 
           value={this.state.lastName}
           onChange={e => this.change(e)}
         />
+
         <br />
-        <input
-          name="username"
-          placeholder="Username"
-          value={this.state.username}
-          onChange={e => this.change(e)}
+
+        <DatePicker
+          name="birthDate"
+          hintText="When's your birthday?"
+          value={this.state.birthDate}
+          onChange={ e => this.change(e)}
         />
+
         <br />
-        <input
-          name="email"
-          placeholder="Email"
-          value={this.state.email}
-          onChange={e => this.change(e)}
-        />
-        <br />
-        <input
-          name="password"
-          type="password"
-          placeholder="Password"
-          value={this.state.password}
-          onChange={e => this.change(e)}
-        />
-        <br />
-        <button onClick={e => this.onSubmit(e)}>Submit</button>
+        <RaisedButton label="Submit" onClick={e => this.onSubmit(e)} primary/>
       </form>
     );
   }
